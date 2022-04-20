@@ -9,10 +9,10 @@ const url_userGen = "https://randomuser.me/api/?format=json";
 let user_node_sug = document.getElementsByClassName("api-generate-sug");
 let user_node_wrap = document.getElementsByClassName("api-generate-wrapper");
 
-fillApi(user_node_sug, false);
-fillApi(user_node_wrap, true);
+setRandomUser(user_node_sug, false);
+setRandomUser(user_node_wrap, true);
 
-function fillApi(user_node, section) {
+function setRandomUser(user_node, section) {
   Array.from(user_node).forEach((node) => {
     if (section == true) {
       for (let i = 1; i <= node.dataset.randomUser; i++) {
