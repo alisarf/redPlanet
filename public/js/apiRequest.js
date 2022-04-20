@@ -5,7 +5,7 @@ async function fetchData(url) {
   return data;
 }
 
-//Get random integer
+//Get random integers
 const getRandomInt = (max) => {
   let i = Math.random() * (max - 0) + 0;
   i = Math.ceil(i);
