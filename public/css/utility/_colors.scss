@@ -1,0 +1,15 @@
+//** COLORS
+
+//## basics
+$main-color: hsl(206, 49%, 44%);
+$main-black: darken($main-color, 16%);
+$main-white: lighten($main-color, 93%);
+$main-bg: lighten($main-color, 50%);
+$main-grey: desaturate($main-color, 70%);
+$main-grey-light: lighten($main-grey, 30%);
+$main-saturated: lighten((saturate($main-color, 20%)), 25%);
+$main-saturated-light: lighten($main-saturated, 39%);
+
+//##buttons
+$primary-btn: hsl(218, 97%, 65%);
+$primary-btn-hover: darken($primary-btn, 14%);

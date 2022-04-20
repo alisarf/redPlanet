@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="images/icons/theRedPlanet.png"/>
+    <title>Feed | Red Planet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <nav>
+        <div id="logo">
+            <a href="home.html">
+                <img src="images/icons/theRedPlanet.svg" alt="">
+            </a>
+        </div>
+        <ul id="nav-options-wrapper" class="menu_toggle">
+            <li class='nav-options' id="home">
+                <a href="">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 58.365 58.365" style="enable-background:new 0 0 58.365 58.365;" xml:space="preserve">
+                    <path fill="white" d="M57.863,26.632l-8.681-8.061V5.365h-10v3.921L29.182,0L0.502,26.632c-0.404,0.376-0.428,1.009-0.052,1.414
+                        c0.375,0.404,1.008,0.427,1.414,0.052l3.319-3.082v33.349h16h16h16V25.015l3.319,3.082c0.192,0.179,0.437,0.267,0.681,0.267
+                        c0.269,0,0.536-0.107,0.732-0.319C58.291,27.641,58.267,27.008,57.863,26.632z M41.182,7.365h6v9.349l-6-5.571V7.365z
+                        M23.182,56.365V35.302c0-0.517,0.42-0.937,0.937-0.937h10.126c0.517,0,0.937,0.42,0.937,0.937v21.063H23.182z M51.182,56.365h-14
+                        V35.302c0-1.62-1.317-2.937-2.937-2.937H24.119c-1.62,0-2.937,1.317-2.937,2.937v21.063h-14V23.158l22-20.429l14.28,13.26
+                        l5.72,5.311v0l2,1.857V56.365z"/>
+                    </svg>Home</a>
+            </li>
+            <li class='nav-options' id="messages">
+                <a href="">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
+                <path fill="white" d="M479.574,78.191H10.425c-0.071,0-0.141,0.007-0.211,0.008l0.001,0.003C4.556,78.315,0,82.925,0,88.617v312.766
+                    c0,5.762,4.669,10.426,10.425,10.426h469.149c5.758,0,10.426-4.664,10.426-10.426V88.617C490,82.854,485.332,78.191,479.574,78.191z
+                    M454.407,99.043l-138.581,138.58c-0.002,0.002-0.004,0.003-0.006,0.005L245,308.449l-70.82-70.821
+                    c-0.004-0.004-0.008-0.007-0.013-0.012L35.594,99.043H454.407z M20.851,113.784l131.215,131.215L20.851,376.215V113.784z
+                    M35.594,390.957l131.215-131.216l70.821,70.821c3.629,3.629,9.303,5.439,14.743,0l70.82-70.82l131.215,131.215H35.594z
+                    M469.149,376.213L337.935,244.999l131.214-131.214V376.213z"/>
+                </svg>Messages</a>
+            </li>
+            <li class='nav-options' id="charts">
+                <a href="">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
+                       <rect fill="white" y="37.7" width="88.7" height="414.6"/>
+                       <rect fill="white" x="133.8" y="147.4" width="88.7" height="304.9"/>
+                       <rect fill="white" x="267.6" y="235.7" width="88.7" height="216.6"/>
+                       <rect fill="white" x="401.3" y="307.2" width="88.7" height="145.1"/>
+               </svg>Analytics</a>
+            </li>
+            
+        </ul>
+        <ul id="nav-user-panel">
+            <li id="user-portrait">
+                <img class="userIcon user_avatar" src="" alt="">
+                <p id="firstName" class="fName user_firstname"></p>
+            </li>
+            <li id="signOutWrapper">
+                <a id="signOutBtn" onclick="signOut()" href="login.html">Sign Out</a>
+            </li>
+        </ul>
+        <div class="menu menu_toggle">
+            <div class="menu__line"></div>
+            <div class="menu__line"></div>
+            <div class="menu__line"></div>
+        </div>
+    </nav>
+    <div class="homeGrid">
+        <div class="homeGrid__col homeGrid__col--first">
+            <section id="userpanel">
+                <div>
+                    <div id="imagebumper">
+                        <img class="userIcon user_avatar icon__user--avatar" src="images/icons/male-avatar.svg" alt="avatar">
+                        <div id="colorblock"></div>
+                    </div>
+                    
+                    <p id="firstnamePanel"><span class="fName user_firstname"></span> <span class="lName user_lastname"></span></p>
+                    <p id="career" class="user_title"></p>
+                </div>
+                <div>
+                    <p>Following</p>
+                    <p>1.8K</p>
+                </div>
+                <div>
+                    <p>Followers</p>
+                    <p>2.55K</p>
+                </div>
+            </section>
+            <section class="lists__users">
+                <div>
+                    <h2>Suggestions</h2>
+                </div>
+                <div class="lists__users--user generate-user api-generate-sug">
+                    <img class="icon__user" src="images/user3.JPG" alt="user portrait">
+                    <h6><strong class="api-username"></strong>Astrophysicist</h6>
+                </div>
+                <div class="lists__users--user">
+                    <img class="icon__user" src="images/user2.jpg" alt="user portrait">
+                    <h6><strong>Luis Covelli</strong>Mechanical Engineer</h6>
+                </div>
+                <div class="lists__users--user">
+                    <img class="icon__user" src="images/user1.jpg" alt="user portrait">
+                    <h6><strong>Toby Covelli</strong>Cert. Good Boy</h6>
+                </div>
+                <div class="lists__users--user generate-user api-generate-sug">
+                    <img class="icon__user" src="images/user3.JPG" alt="user portrait">
+                    <h6><strong class="api-username"></strong>Plastics Engineer</h6>
+                </div>
+                <div class="lists__users--user">
+                    <img class="icon__user" src="images/user3.JPG" alt="user portrait">
+                    <h6><strong>Ali Fares-Boulos</strong>Frontend Dev</h6>
+                </div>
+            </section>
+            <section class="lists__users">
+                <h2>Favorites</h2>
+                <a href=""><img class="icon__fav" src="images/icons/newsfeed.svg" alt="tablet"><p>News Feed</p></a>          
+                <a href=""><img class="icon__fav" src="images/icons/calendar.svg" alt="calendar"><p>Events</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/messages.svg" alt="envelope"><p>Messages</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/mostrecent.svg" alt="pin"><p>Most Recent</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/yourposts.svg" alt="sharing/forking"><p>Your Posts</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/archives.svg" alt="envelope"><p>Archives</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/analytics.svg" alt="pin"><p>Analytics</p></a>
+                <a href=""><img class="icon__fav" src="images/icons/notes.svg" alt="sharing/forking"><p>Notes</p></a>
+            </section>
+        </div>
+        <div class="homeGrid__col homeGrid__col--second">
+            <section class="homeGrid__col--card createUpdateWrapper">
+                <div class="createUpdate">
+                    <img class="userIcon user_avatar icon__user--avatar" src="" alt="">
+                    <h2 class="user_fullname"></h2></span>
+                    <div></div>
+                </div>        
+                <div id="createUpdateLower">
+                    <textarea name="" id="" placeholder="Write your post here..."></textarea>
+                    <div class="updateOpt">
+                        <button class="btn__plus">+ Tag a friend</button>
+                        <button class="btn__plus">+ Add Photo</button>
+                        <button class="btn__primary">Post</button>
+                    </div>
+                </div>
+            </section>
+
+            <div data-random-user="3" class="homeGrid__col--card api-generate-wrapper"></div>
+
+            <span data-article-count=3 class="apiArticles">
+                <!--API INSERTS ARTICLES-->
+            </span>
+
+            <div data-random-user="5" class="homeGrid__col--card api-generate-wrapper"></div>
+
+            <section class="homeGrid__col--card">
+                <h2>Galatic Times</h2>
+                <span data-article-count=1 class="apiArticles"> 
+                </span>
+            </section>
+
+            <div data-random-user="3" class="homeGrid__col--card api-generate-wrapper"></div>
+
+        </div>
+        <div data-article-count=8 class="homeGrid__col homeGrid__col--third apiArticles">
+            <!--API INSERTS ARTICLES-->
+        </div>
+    </div>
+    <footer>
+        <div id="foot-logo">
+            <img src="images/icons/theRedPlanet.svg" alt="">
+        </div>
+        <div id="foot-copyright">
+            <span>Copyright &copy; The Red Planet 2021   All Rights Reserved</span>
+        </div>
+        <div id="foot-options">
+            <ul>
+                <li>about</li>
+                <li>company</li>
+                <li>policy</li>
+            </ul>
+        </div>
+    </footer>
+    <script src="js/fb_config.js"></script>
+    <script src="js/userProfile.js"></script>
+    <script src="js/apiRequest.js"></script>
+    <script src="js/nodeList_to_array.js"></script>
+    <script src="js/newsApi.js"></script>
+    <script src="js/randomUserGenerator.js"></script>
+    <script src="js/hamburger.js"></script>
+</body>
+</html>

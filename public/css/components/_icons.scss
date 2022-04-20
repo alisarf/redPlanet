@@ -1,0 +1,15 @@
+//## Icons and Avatars
+.icon__fav {
+  @include box(30px);
+}
+.icon__user {
+  @include box(50px);
+  border-radius: 30px;
+  &--avatar {
+    @extend .icon__user;
+    border: 3px solid white;
+    position: relative;
+    z-index: 2;
+    background-color: $main-bg;
+  }
+}

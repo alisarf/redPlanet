@@ -1,0 +1,152 @@
+@import "../utility/mixins";
+
+//HOME PAGE
+
+.flex-spacebet {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  @extend .flex-spacebet;
+  height: 80px;
+  padding: 0 10vw;
+  background-color: $main-saturated;
+  ul {
+    @extend .flex-spacebet;
+    gap: 15px;
+    padding-left: 0;
+  }
+  #logo {
+    align-self: center;
+    position: relative;
+    @include box(50px);
+    a {
+      position: absolute;
+      @include box(100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    img {
+      @include box(40px);
+    }
+  }
+  #user-portrait {
+    @extend .flex-spacebet;
+    text-transform: capitalize;
+    gap: 10px;
+    img {
+      align-self: center;
+      height: 80%;
+      border-radius: 50px;
+      border: 2px solid white;
+      background-color: $main-bg;
+      @include tablet {
+        display: none;
+      }
+    }
+    p {
+      align-self: center;
+      color: $main-white;
+      cursor: pointer;
+      &:hover {
+        color: $main-saturated-light;
+      }
+    }
+  }
+  #signOutWrapper {
+    display: flex;
+    a {
+      align-self: center;
+    }
+  }
+  li {
+    display: inline-block;
+    p {
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+  .nav-options {
+    align-self: center;
+    a {
+      text-decoration: none;
+      font-weight: 700;
+      color: $main-white;
+      &:hover {
+        color: #90dfff;
+        @extend .trans-reg;
+        svg path,
+        svg rect {
+          fill: $main-saturated-light;
+        }
+      }
+    }
+    svg {
+      margin: 0 auto 5px auto;
+      display: block;
+    }
+  }
+  svg {
+    @include box(20px);
+  }
+  @include phone {
+    padding: 0 20px;
+  }
+}
+
+//DISPLAY HAMBURGER MENU
+@media only screen and (max-width: 768px) {
+  /* !No @extend within @media, Consider @mixin if necessary! */
+  .open#nav-options-wrapper {
+    visibility: visible;
+    right: 0;
+    transition: all 0.3s ease-in-out; //!No @extend within @media
+    li {
+      visibility: visible;
+      opacity: 1;
+      right: 0;
+      transition: all 0.5s ease-in-out; //!No @extend within @media
+    }
+    //transition delay fxn for animation of nav
+    @for $i from 1 to 4 {
+      li:nth-child(#{$i}) {
+        transition-delay: $i * 0.1s;
+      }
+    }
+  }
+  #nav-options-wrapper {
+    right: -50vw;
+    @include box(50vw, 100vh);
+    position: fixed;
+    background: rgb(39, 39, 39);
+    display: block;
+    margin: 0;
+    z-index: 5;
+    top: 0;
+    padding: 15vh 0 0 0;
+    transition: all 0.5s ease-in-out; //!No @extend within @media
+    li {
+      visibility: hidden;
+      opacity: 0;
+      display: block;
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #3c3c3c;
+      a {
+        letter-spacing: 2px;
+        color: hsl(0, 0%, 84%);
+      }
+      &:hover {
+        border-color: hsl(0, 0%, 100%);
+        transition: border-bottom 0.1s ease-in-out;
+        a {
+          color: hsl(0, 0%, 100%);
+        }
+      }
+    }
+  }
+}

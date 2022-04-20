@@ -1,0 +1,450 @@
+//** General Styling
+/*------Index------*/
+//## Imports
+//## General Styles
+//## Homepage
+//## Create New User
+//## Login
+//## Media Queries
+
+//##Imports
+@import "global/reset";
+@import "utility/colors";
+@import "utility/fonts";
+@import "utility/mixins";
+@import "components/button";
+@import "components/homegrid";
+@import "components/hamburger";
+@import "components/footer";
+@import "components/nav";
+@import "components/icons";
+
+//##General Styles
+html {
+  font-size: 12px;
+}
+body {
+  background-color: $main-bg;
+}
+img,
+input,
+svg {
+  cursor: pointer;
+}
+a,
+svg path,
+svg rect {
+  @extend .trans-reg;
+}
+
+//##Homepage
+//#Homepage : sections
+.homeGrid section {
+  background-color: white;
+  padding: 15px;
+  border-radius: 3px;
+  h2 {
+    font-size: 1.5rem;
+    color: $main-black;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  h3 {
+    font-size: 1.3rem;
+    margin: 5px 0;
+    line-height: 1.3rem;
+  }
+}
+//#Homepage : Left Panel
+#userpanel {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  div:first-of-type {
+    padding-bottom: 15px;
+    width: 100%;
+    #career {
+      color: $main-grey;
+      text-transform: capitalize;
+    }
+    #imagebumper {
+      padding-top: 80px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      #colorblock {
+        background-image: url("../images/background2.jpg");
+        background-size: cover;
+        background-position-y: -50px;
+        background-repeat: no-repeat;
+        height: 110px;
+        @include abs-position(0, auto, auto, 0);
+      }
+    }
+  }
+  div:nth-of-type(2),
+  div:nth-of-type(3) {
+    border: 1px solid white;
+    width: 100%;
+    padding: 15px 0;
+    background-color: white;
+    p:first-of-type {
+      color: $main-grey;
+      //color: rgb(85, 136, 85);
+    }
+    p:last-of-type {
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+  div:nth-of-type(2) {
+    border-top: 1px solid $main-grey-light;
+  }
+  div:nth-of-type(3) {
+    border-radius: 0 0 3px 3px;
+  }
+  p {
+    text-align: center;
+  }
+  #firstnamePanel {
+    margin: 8px auto;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+}
+
+//Homepage: Left Panel Suggested Users
+.lists__users {
+  .lists__users--user {
+    display: grid;
+    grid-template-columns: 50px auto;
+    grid-template-rows: 25px 25px;
+    column-gap: 10px;
+    margin: 20px 0;
+    row-gap: 0;
+    cursor: pointer;
+    h6 {
+      grid-column: 2;
+      grid-row: 1/2;
+    }
+    p {
+      grid-column: 2;
+      grid-row: 2/3;
+      color: $main-grey;
+    }
+  }
+  a {
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+  }
+}
+
+.homeGrid__col--second .flex-images {
+  display: flex;
+  gap: 15px;
+  div {
+    flex: 1;
+    margin-bottom: 15px;
+  }
+}
+.homeGrid__col--card {
+  position: relative;
+  .timestamp {
+    @include abs-position(15px, 15px, auto, auto);
+  }
+  .createUpdate {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 85px 15px 15px 15px;
+    position: relative;
+
+    h2 {
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+    }
+    div {
+      background-color: $main-saturated;
+      border-radius: 3px 3px 0 0;
+      @include box(100%, 110px);
+      @include abs-position(0, auto, auto, 0);
+    }
+  }
+  .updateOpt {
+    margin-top: 10px;
+  }
+  textarea {
+    box-sizing: border-box;
+    @include box(100%, 80px);
+    padding: 5px;
+  }
+  textarea:focus {
+    outline: none;
+  }
+}
+.homeGrid__col--card.createUpdateWrapper {
+  padding: 0 0 15px 0;
+  #createUpdateLower {
+    padding: 0 15px;
+  }
+}
+
+.generate-user {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+  h2 {
+    align-self: center;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
+.api-generate-wrapper {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section1x1 {
+  div {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto;
+    gap: 15px;
+  }
+  img {
+    @include box(100%);
+    object-fit: cover;
+  }
+  p {
+    text-overflow: ellipsis;
+  }
+}
+//division between api articles
+.apiArticle {
+  margin-bottom: 15px;
+}
+//split article section to two
+.temp_split {
+  display: flex;
+  gap: 15px;
+  div {
+    flex: 1;
+  }
+}
+
+.text_overflow {
+  display: -webkit-box;
+  //max-width: 200px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+//## Create New User Page
+#createUserContainer {
+  @include box(100vw, 100vh);
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 100%;
+  grid-template-columns: 50% 50%;
+  background-color: #eafdff;
+  #leftContainerImg {
+    @include box(100%);
+    background-image: url("../images/image-from-rawpixel-id-2370026-jpeg\ \(1\).jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 80%;
+    }
+  }
+  section {
+    @include box(100%);
+    background-color: #eafdff;
+    padding: 20vh 2vw;
+    max-width: 500px;
+    margin-left: 50px;
+    h1 {
+      padding: 0;
+      text-align: left;
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #ff7600;
+    }
+    h2 {
+      font-size: 2rem;
+    }
+    p:first-of-type {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    //prevent conflict with entry error.
+    p:not(.invalidText) {
+      color: $main-grey;
+    }
+    #createUserQuestions,
+    #loginUserQuestions {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 2px 2px 8px #c7ebf1;
+      background-color: white;
+      select {
+        width: 100%;
+        border: none;
+        border-radius: 0 0 0 10px;
+        padding-right: 40px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+      }
+      select:focus {
+        outline: none;
+      }
+    }
+    .margin-left-15 {
+      margin-left: 0;
+    }
+
+    //media queries
+    @include desktop {
+      width: 80%;
+    }
+    @include large {
+      margin: auto;
+      padding: 8vh 0 0 0;
+    }
+    @include tablet {
+      width: 100%;
+      max-width: none;
+      padding: 5vh 0 0 0;
+      margin: 0;
+      .info-wrapper input,
+      #loginUserQuestions {
+        border-radius: 0;
+      }
+      .margin-left-15 {
+        margin-left: 15px;
+      }
+      #createUserQuestions {
+        border-radius: 0;
+      }
+    }
+  }
+  h1,
+  h2,
+  section p,
+  button {
+    @include tablet {
+      margin-left: 15px;
+    }
+  }
+  //Media Queries
+  @include large {
+    grid-template-columns: 100%;
+    grid-template-rows: 300px auto;
+  }
+}
+
+.createNewUser {
+  visibility: hidden;
+  @include box(100vw, 100vh);
+  background-color: #3f475ca8;
+  @include abs-position(0, auto, auto, 0);
+  display: flex;
+  justify-content: center;
+  color: lightgrey;
+  .createNewUserContent {
+    align-self: center;
+    background-color: white;
+    @include box(500px, fit-content);
+    border-radius: 20px;
+    padding: 50px;
+    color: lightgrey;
+    p {
+      text-align: center;
+      color: $main-grey;
+      margin-bottom: 20px;
+    }
+    #btnholder {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+.info-wrapper {
+  @extend .flex-spacebet;
+  height: 50px;
+  input,
+  select {
+    align-self: center;
+    padding-left: 40px;
+    @include box(100%);
+    font-size: 16px;
+    border: 0;
+    color: $main-grey;
+  }
+  input:focus {
+    outline: 0;
+    color: #a8a8a8;
+    background-color: #d6edf1;
+    border: 0;
+  }
+  input:active,
+  input:visited {
+    background-color: #daf2f7;
+  }
+}
+
+//## login Page
+#loginUserQuestions input:last-of-type {
+  border-radius: 0 0 0 10px;
+}
+#login-invalidPassword.active {
+  //a bit laggy without !import
+  visibility: visible;
+}
+
+//## Sign up/ Create new User Page
+//##Invalid Input Msg and SVG
+.invalidIcon {
+  width: 20px;
+  margin-right: 10px;
+  margin-left: 5px;
+  visibility: hidden;
+}
+.invalidText {
+  color: #d75a4a;
+  visibility: hidden;
+}
+.showinvalid.invalidText,
+.showinvalid.invalidIcon,
+.show#signup_alert,
+.show.createNewUser {
+  visibility: visible;
+}
+
+//------MEDIA QUERIES------------
+//1100,992,600

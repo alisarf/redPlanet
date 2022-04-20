@@ -1,0 +1,75 @@
+//** Buttons
+//## Mixin Template
+//## Apply mixin to all button tags
+//## Button Types
+
+@import "../utility/colors";
+
+//## Mixin Template
+@mixin button-custom(
+  $color: white,
+  $bg: $primary-btn,
+  $color-hover: white,
+  $bg-hover: $primary-btn-hover
+) {
+  background-color: $bg;
+  color: $color;
+  &:hover {
+    background-color: $bg-hover;
+    color: $color-hover;
+  }
+}
+
+//## Apply mixin to all button tags
+button {
+  @include button-custom();
+  @include box(100px, 30px);
+  //margin-left:40px;
+  border: 0;
+  font-size: 13px;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    @extend .trans-reg;
+  }
+}
+
+//## Button Types
+.btn {
+  &__plus {
+    @include button-custom(
+      $primary-btn,
+      transparent,
+      $primary-btn-hover,
+      transparent
+    );
+    border-radius: 0;
+    margin-left: 0;
+    font-weight: 700;
+  }
+  &__primary {
+    //shift to right
+    display: block;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+  &__secondary {
+    @include button-custom(#b4b4b4, transparent, grey, inherit);
+  }
+  &__signUp {
+    @include button-custom($bg: #b8b8b8, $bg-hover: #a1a1a1);
+    margin: 0;
+  }
+}
+
+//Uses an anchor tag
+//NEEDS TLC
+#signOutBtn {
+  @extend button;
+  @include button-custom(#b4c6cf, white, #b4c6cf, #ffffffd0);
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px 10px;
+}

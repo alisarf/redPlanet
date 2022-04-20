@@ -1,0 +1,67 @@
+/**----Font Variables----**/
+:root {
+  --lexend-exa: "Lexend Exa", sans-serif;
+  --roboto: "Roboto", "sans-serif";
+  --roboto-mono: "Roboto Mono", "sans-serif";
+}
+
+@mixin lexendExa {
+  font-family: var(--lexend-exa), monospace, sans-serif;
+}
+
+@mixin roboto {
+  font-family: var(--roboto), monospace, sans-serif;
+}
+
+@mixin robotoMono {
+  font-family: var(--roboto-mono), monospace, sans-serif;
+}
+
+#firstnamePanel,
+#firstName,
+.generate-user-name {
+  @include robotoMono;
+}
+h1,
+h2,
+h3 {
+  @include robotoMono;
+}
+p {
+  font-size: 14px;
+  @include roboto;
+  font-weight: 400;
+}
+body {
+  font-family: sans-serif;
+}
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
+h6 {
+  font-size: 14px;
+  font-weight: 400;
+  color: $main-grey;
+  & strong {
+    display: block;
+    color: black;
+    font-weight: 700;
+    @include robotoMono;
+  }
+}
+
+.apiArticle a {
+  color: #1d3e57;
+  text-decoration: none;
+  &:hover {
+    color: #2a587a;
+  }
+}
+
+//##Logged in User's Name Input
+.fName,
+.lName,
+.user_fullname {
+  text-transform: capitalize;
+}

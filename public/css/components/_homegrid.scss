@@ -1,0 +1,79 @@
+//grid
+.homeGrid {
+  display: grid;
+  grid-template-columns: 25% 45% 25%;
+  gap: 2.5%; //or 2.5%
+  padding: 5vh 10vw;
+  &__col {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    row-gap: 20px;
+    height: fit-content;
+  }
+  &--first {
+    grid-column: 1;
+  }
+  &--second {
+    grid-column: 2;
+  }
+  &--third {
+    grid-column: 3;
+  }
+
+  //media queries
+  @include large {
+    grid-template-columns: 40% auto;
+    grid-template-rows: auto auto;
+    column-gap: 2.5%;
+    row-gap: 0;
+    &__col--first {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    &__col--second {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    &__col--third {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+  @include tablet {
+    padding: 5vh 5vw;
+    column-gap: 2.5%;
+    row-gap: 0;
+  }
+  @include phablet {
+    padding: 5vh 0;
+    display: block;
+    &__col--first {
+      grid-column: 1;
+      grid-row: 1;
+      row-gap: 0;
+      margin-bottom: 5vh;
+      .lists__users {
+        display: none;
+      }
+    }
+    &__col--second {
+      grid-column: 1;
+      grid-row: 2;
+      margin-bottom: 5vh;
+    }
+    &__col--third {
+      grid-column: 1;
+      grid-row: 3;
+    }
+  }
+}
+
+.col-3 {
+  h3 {
+    cursor: pointer;
+  }
+  img {
+    margin: 15px auto;
+  }
+}

@@ -1,0 +1,40 @@
+//** Hamburger Menu
+//## Basic Styling
+//## Animation
+//## Media Query
+
+//Basic Styling
+.menu {
+  display: none;
+  @include box(30px, 29px);
+  position: relative;
+  align-self: center;
+  cursor: pointer;
+  &__line {
+    @include box(28px, 3px);
+    background-color: white;
+    margin-top: 5px;
+    position: relative;
+    @extend .trans-slow;
+  }
+  @include tablet {
+    display: block;
+    z-index: 6;
+  }
+}
+
+//Animation
+/*
+When .open is added to classes the following animation occurs.
+Fades out middle line, requires more specificity to override prev style.
+*/
+.menu.open .menu__line:nth-child(2) {
+  background-color: transparent;
+  @extend .trans-reg;
+}
+.menu.open .menu__line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu.open .menu__line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
