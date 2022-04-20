@@ -65,4 +65,4 @@ node_modules/
 # dotenv environment variables file and api keys
 .env
 
-public\js\fb_config.js
+public/js/fb_config.js
