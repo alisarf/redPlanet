@@ -21,9 +21,9 @@ live: https://thestoreco.web.app/
 
 ### The challenge
 
-Initially, I wanted to build a login form that connected with php/mySQL. But because I use Firebase's free hosting for all my work, I found that I would need to use noSQL to be able to access the DB features. It was a bit challenging learning how to get my project connected to the Realtime Database but once it was set up the rest was fairly straight-forward. 
+Initially, I wanted to build a login form that connected with php/mySQL. But because I use Firebase's free hosting for all my work, I found that I would need to use noSQL to be able to access the DB features. It was a bit challenging learning how to get my project connected to the Realtime Database but once it was set up the rest was fairly straight-forward.
 
-Another challenge I had was trying to find the password associated to the user's email. I needed to take the email input given, find its unique key, and validate if the password associated to the unique key matched. The problem was caching the unique key! I found that the documentation for this issue was hard to follow but eventually I found how to access the key and learned more about transversing around the DB in the process. Once I had the ability to set and retrieve the data, I decided to expand the project and add a homepage. 
+Another challenge I had was trying to find the password associated to the user's email. I needed to take the email input given, find its unique key, and validate if the password associated to the unique key matched. The problem was caching the unique key! I found that the documentation for this issue was hard to follow but eventually I found how to access the key and learned more about transversing around the DB in the process. Once I had the ability to set and retrieve the data, I decided to expand the project and add a homepage.
 
 ### Screenshot
 
@@ -44,8 +44,8 @@ Homepage Feed:
 - SCSS
 - JavaScript
 - Firebase's Realtime Database
-- Flexbox
-- CSS Grid
+- BEM
+- Data-set in HTML
 - Space Flight News API
 - Random User API
 
@@ -64,7 +64,7 @@ For the sake of time, I used the Random User API to generate fake users and appe
 
 User Settings:
 
-Add a settings page to allow users to edit their settings such as avatar, career title, or page theme. 
+Add a settings page to allow users to edit their settings such as avatar, career title, or page theme.
 
 ### API's
 

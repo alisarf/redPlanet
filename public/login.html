@@ -14,32 +14,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
     <body>
+        <div class="starryNight"></div>
+        <div class="table_center">
         <div id="createUserContainer">
-            <div id="leftContainerImg">
-                <img src="images/Rocket Launch _Two Color.svg" alt="">
+            <div class="solar_system_wrap ">
+            <div class="solar-system">
+                <div class="planet planet1">
+                    <div class="planet planet2">
+                    <div class="planet planet3">
+                        <div class="planet planet4">
+                        <div class="sun"></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
+        </div>
+            
             <section>
-                <div>
-                    <h1>The Red Planet</h1>
+                
+                    <h1>Red Planet</h1>
                     <h2>Sign In</h2>
                     <p class="marginL-15">Let's get you caught up on the latest space news.</p>
                     <form id="contactForm">
                         <div id="loginUserQuestions">
                             <div class="info-wrapper">
-                                <input class="format_check" type="text" id="email" placeholder="Email">
+                                <input class="format_check" type="text" id="email" placeholder="Email" autocomplete="off">
                                 <p class="invalidText alert_format">Invalid</p><img class="invalidIcon alert_format" src="images/icons/error-svgrepo-com.svg" alt="">
-                               
                             </div>
                             
                             <div class="info-wrapper">    
-                                <input class="format_check" type="text" id="pwd" placeholder="Password">
+                                <input class="format_check" type="text" id="pwd" placeholder="Password"  autocomplete="off">
                                 <p class="invalidText alert_format">Invalid</p><img class="invalidIcon alert_format" src="images/icons/error-svgrepo-com.svg" alt="">
                             </div>
                         </div>
-                        <button id="login" class="my-20">Login</button>
+                        <span class="my-20 btn__gradient"><button id="login" class="btn__primary">Login</button></span>
+                        <!--<a href="index.html"><button class="btn__signUp">Sign Up</button></a>-->
+                        <p>Not a member? <a href="index.html" class="option_link">Sign up.</a></p>
                     </form>
-                    <a href="index.html"><button class="btn__signUp">Sign Up</button></a>
-                </div>
+                    
+                
             </section>
         </div>
         <div class="createNewUser" id="signup_alert">
@@ -66,6 +80,7 @@
                 <p>Successfully Logged In</p>
             </div>
         </div>
+    </div>
     <script src="js/fb_config.js"></script>
     <script src="js/index.js"></script>
     <script src="js/nodeList_to_array.js"></script>

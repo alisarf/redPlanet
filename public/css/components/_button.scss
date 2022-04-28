@@ -7,10 +7,10 @@
 
 //## Mixin Template
 @mixin button-custom(
-  $color: white,
-  $bg: $primary-btn,
-  $color-hover: white,
-  $bg-hover: $primary-btn-hover
+  $color: $white,
+  $bg: $black_overlay,
+  $color-hover: $white,
+  $bg-hover: $black_overlay
 ) {
   background-color: $bg;
   color: $color;
@@ -20,14 +20,22 @@
   }
 }
 
+.btn_extras {
+  font-weight: 700;
+  @include inter;
+  font-size: 15px;
+  letter-spacing: -0.5px;
+}
+
 //## Apply mixin to all button tags
 button {
   @include button-custom();
   @include box(100px, 30px);
   //margin-left:40px;
   border: 0;
-  font-size: 13px;
-  border-radius: 3px;
+  font-size: 15px;
+  border-radius: 20px;
+  text-align: center;
   &:hover {
     cursor: pointer;
     @extend .trans-reg;
@@ -37,39 +45,78 @@ button {
 //## Button Types
 .btn {
   &__plus {
-    @include button-custom(
-      $primary-btn,
-      transparent,
-      $primary-btn-hover,
-      transparent
-    );
+    @include button-custom($red_light, transparent, $red_norm, transparent);
     border-radius: 0;
     margin-left: 0;
     font-weight: 700;
+    font-size: 13px;
+    width: auto;
   }
   &__primary {
-    //shift to right
+    @include button-custom($white, $black_overlay, $white, transparent);
     display: block;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: 0;
+    text-align: center;
+    @extend .btn_extras;
   }
   &__secondary {
     @include button-custom(#b4b4b4, transparent, grey, inherit);
   }
   &__signUp {
-    @include button-custom($bg: #b8b8b8, $bg-hover: #a1a1a1);
+    @include button-custom($white_dark, $black_overlay, $white #a1a1a133);
     margin: 0;
+    border: 1px solid #ffffff73;
+    width: 106px;
+    height: 36px;
   }
 }
 
 //Uses an anchor tag
 //NEEDS TLC
 #signOutBtn {
-  @extend button;
-  @include button-custom(#b4c6cf, white, #b4c6cf, #ffffffd0);
+  border-radius: var(--border);
   text-decoration: none;
-  height: fit-content;
-  width: fit-content;
+  height: 30px;
+  width: 100px;
   padding: 5px 10px;
+}
+.signOut_wrap {
+  @include tablet {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+}
+
+//Gradient button with animation
+span.btn__gradient {
+  @extend .gradient;
+  width: 106px;
+  height: 36px;
+  border-radius: var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+span.btn__gradient::before {
+  position: absolute;
+  content: "";
+  border-radius: var(--border);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $orange;
+  background: linear-gradient(158deg, $blue 30%, $orange 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease-in;
+}
+span.btn__gradient:hover::before {
+  opacity: 1;
+}
+//post position btn
+span.btn__gradient--post {
+  margin: 20px 0 auto auto;
 }

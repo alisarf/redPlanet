@@ -1,13 +1,13 @@
 /** Random User Generator
  * Dynamically fills into home.html fake user profiles.
  * api-generate-sug fills in the suggested friends column
- * api-generate-wrapper fills in anywhere comments are needed on feed
+ * apiRandomUser fills in anywhere comments are needed on feed
  * requires web server to stop CORS errors
  */
 
 const url_userGen = "https://randomuser.me/api/?format=json";
 let user_node_sug = document.getElementsByClassName("api-generate-sug");
-let user_node_wrap = document.getElementsByClassName("api-generate-wrapper");
+let user_node_wrap = document.getElementsByClassName("apiRandomUser");
 
 setRandomUser(user_node_sug, false);
 setRandomUser(user_node_wrap, true);
@@ -51,11 +51,21 @@ var comments = [
 function buildComment(user) {
   let feedcomment = `
     <div class="generate-user">
-        <img class="icon__user" src="${user.picture.thumbnail}" alt="">
+        <div class='generate-user-halo'><img class="icon__user icon__md" src="${
+          user.picture.thumbnail
+        }" alt=""></div>
         <h2 class="api-username">${user.name.first} ${user.name.last}</h2>
     </div>        
     <p class="api-text">${comments[getRandomInt(comments.length - 1)]}</p>
-    <button class="btn__primary">Reply</button>
-    <span class="timestamp">${getRandomInt(20)} hrs</span>`;
+    <div class='generate-user__lowWrap'>
+    <span class='generate-user__lowWrap--likes'>
+    <img src='./images/like-svgrepo-com.svg' class='increment icons_likes_thumb'/>
+    <img src='./images/favourite-svgrepo-com.svg' class='increment icons_likes_award'/>
+    <img src='./images/heart-svgrepo-com.svg' class='increment icons_likes_heart'/>
+    <p> ${getRandomInt(1000)}</p>
+    </span>
+    <span class='btn__gradient'><button class="btn__primary">Reply</button></span></div>
+
+    <span class="timestamp">${getRandomInt(20)} h ago</span>`;
   return feedcomment;
 }

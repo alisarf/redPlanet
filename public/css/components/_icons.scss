@@ -1,15 +1,79 @@
 //## Icons and Avatars
+
+@import "../utility/colors";
+
 .icon__fav {
   @include box(30px);
 }
-.icon__user {
-  @include box(50px);
-  border-radius: 30px;
-  &--avatar {
-    @extend .icon__user;
-    border: 3px solid white;
-    position: relative;
-    z-index: 2;
-    background-color: $main-bg;
+.icons_likes {
+  display: inline;
+  @include box(24px);
+  align-self: center;
+}
+.icons_likes_thumb,
+.icons_likes_heart,
+.icons_likes_award {
+  @extend .icons_likes;
+  border: 2px solid $black_overlay;
+  border-radius: var(--border);
+  background-color: $black_overlay;
+  &:hover {
+    height: 30px;
+    width: 30px;
+    transition: all 0.2s ease-in-out;
   }
 }
+.icons_likes_thumb {
+  position: absolute;
+}
+.icons_likes_thumb:active,
+.icons_likes_heart:active,
+.icons_likes_award:active {
+  @include box(35px);
+}
+.icons_likes_thumb:hover,
+.icons_likes_award:hover {
+  z-index: 1;
+}
+.icons_likes_award {
+  position: absolute;
+  left: 40px;
+}
+.icons_likes_heart {
+  left: 40px; //add 20 per adj. icon
+  position: relative;
+}
+
+//circular avatars/users
+.icon__user {
+  border-radius: 50px;
+  padding: 3px;
+  &--avatar {
+    // span > img
+    @extend .gradient;
+    border-radius: 50px;
+    z-index: 2;
+  }
+  &--avatar img {
+    @extend .icon__user;
+    margin: 3px;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    background-color: $black_overlay;
+  }
+}
+
+//icon sizes
+.icon {
+  &__md {
+    @include box(50px);
+  }
+  &__lg {
+    @include box(60px);
+  }
+  &__xl {
+    @include box(70px);
+  }
+}
+

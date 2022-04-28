@@ -13,3 +13,34 @@ $main-saturated-light: lighten($main-saturated, 39%);
 //##buttons
 $primary-btn: hsl(218, 97%, 65%);
 $primary-btn-hover: darken($primary-btn, 14%);
+
+//color pallete test
+$black: #0b121e;
+$black_overlay: #1d242f;
+
+//$orange: rgba(241, 160, 128, 1);
+$orange: rgb(190, 128, 241);
+//$fuschia: rgba(232, 95, 239, 1);
+$fuschia: rgb(231, 88, 88);
+$blue: rgba(82, 231, 242, 1);
+$blue_primary: #378fe9;
+.gradient {
+  background: $orange;
+  background: linear-gradient(158deg, $orange 0%, $fuschia 50%, $blue 100%);
+}
+$white: #fbfdfe;
+$white_dark: #aaabab;
+$red_light: #ee8e9f;
+$red_norm: darken($red_light, 10%);
+$bg_dark: linear-gradient(180deg, $black_overlay, $black);
+body {
+  background-color: $black;
+  background-image: radial-gradient(
+      50% 50% at top center,
+      rgba(0, 0, 0, 0.66),
+      $black
+    ),
+    $bg_dark;
+}
+$input-text: $white;
+//border radius - 20px

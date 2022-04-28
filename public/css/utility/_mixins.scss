@@ -1,9 +1,22 @@
 //extending
-
 //Boxes
 @mixin box($width, $height: $width) {
   width: $width;
   height: $height;
+}
+:root {
+  --gap-p: 3rem;
+  --gap-p-sm: 2rem;
+  --border: 20px;
+}
+
+@mixin navColor($font, $underline: $white) {
+  a {
+    color: $font !important;
+  }
+  span {
+    color: $underline;
+  }
 }
 
 //helper classes
@@ -12,6 +25,7 @@
 }
 
 //Media Queries
+//widths
 $phone: 375;
 $phablet: 600;
 $tablet: 768;
@@ -48,6 +62,21 @@ $desktop: 1280;
   }
 }
 
+@mixin tabletMin {
+  @media only screen and (min-width: ($tablet * 1px)) {
+    @content;
+  }
+}
+
+//heights
+$heightLG: 754;
+
+@mixin HeightLG {
+  @media only screen and (max-height: ($heightLG * 1px)) {
+    @content;
+  }
+}
+
 //absolute position
 @mixin abs-position($top, $right, $bottom, $left) {
   position: absolute;
@@ -59,8 +88,36 @@ $desktop: 1280;
 
 //transition default
 .trans-reg {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .trans-slow {
   transition: all 0.5s ease-in-out;
+}
+
+//User halo animation
+//add class to a div/span/btn wrapper
+.generate-user-halo {
+  @extend .gradient;
+  border-radius: 50px;
+  @include box(auto);
+  position: relative;
+  z-index: 1;
+}
+
+.generate-user-halo::before {
+  position: absolute;
+  content: "";
+  border-radius: 50px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $orange;
+  background: linear-gradient(58deg, $blue 20%, $fuschia 50%, $orange 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease-in;
+}
+.generate-user-halo:hover::before {
+  opacity: 1;
 }
