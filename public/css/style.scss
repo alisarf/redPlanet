@@ -13,18 +13,23 @@
 @import "utility/fonts";
 @import "utility/mixins";
 @import "components/button";
+@import "components/fileUpload";
 @import "components/homegrid";
 @import "components/hamburger";
 @import "components/footer";
 @import "components/nav";
 @import "components/icons";
+@import "components/login";
 
 //##General Styles
 html {
-  font-size: 12px;
+  font-size: 14px; //prev 12
+  @include tablet {
+    font-size: 12px;
+  }
 }
 body {
-  background-color: $main-bg;
+  //background-color: $bg_dark;
 }
 img,
 input,
@@ -40,20 +45,33 @@ svg rect {
 //##Homepage
 //#Homepage : sections
 .homeGrid section {
-  background-color: white;
-  padding: 15px;
-  border-radius: 3px;
+  background-color: $black_overlay;
+  padding: 1.5rem;
+  border-radius: var(--border);
   h2 {
-    font-size: 1.5rem;
-    color: $main-black;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
+    @extend .h2_basic;
   }
   h3 {
     font-size: 1.3rem;
-    margin: 5px 0;
-    line-height: 1.3rem;
+    color: $white;
+    margin-bottom: 15px;
+    &:hover {
+      color: #b8cdcd;
+    }
   }
+}
+.apiArticle img {
+  margin-bottom: 15px;
+}
+.apiArticle__keyword {
+  color: #ea72cd;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1.5rem;
+  line-height: 1;
+  display: inline-block;
 }
 //#Homepage : Left Panel
 #userpanel {
@@ -70,12 +88,12 @@ svg rect {
       text-transform: capitalize;
     }
     #imagebumper {
-      padding-top: 80px;
+      padding-top: 40px;
       position: relative;
       display: flex;
       justify-content: center;
       #colorblock {
-        background-image: url("../images/background2.jpg");
+        //background-image: url("../images/background2.jpg");
         background-size: cover;
         background-position-y: -50px;
         background-repeat: no-repeat;
@@ -86,10 +104,9 @@ svg rect {
   }
   div:nth-of-type(2),
   div:nth-of-type(3) {
-    border: 1px solid white;
+    //border: 1px solid white;
     width: 100%;
     padding: 15px 0;
-    background-color: white;
     p:first-of-type {
       color: $main-grey;
       //color: rgb(85, 136, 85);
@@ -97,10 +114,11 @@ svg rect {
     p:last-of-type {
       font-weight: 700;
       font-size: 20px;
+      color: $white;
     }
   }
   div:nth-of-type(2) {
-    border-top: 1px solid $main-grey-light;
+    border-top: 1px solid $blue;
   }
   div:nth-of-type(3) {
     border-radius: 0 0 3px 3px;
@@ -110,9 +128,7 @@ svg rect {
   }
   #firstnamePanel {
     margin: 8px auto;
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-size: 16px;
+    @extend .h2_basic;
   }
 }
 
@@ -121,11 +137,12 @@ svg rect {
   .lists__users--user {
     display: grid;
     grid-template-columns: 50px auto;
-    grid-template-rows: 25px 25px;
+    grid-template-rows: auto auto;
     column-gap: 10px;
-    margin: 20px 0;
+    margin: 0 0 20px;
     row-gap: 0;
     cursor: pointer;
+    align-items: center;
     h6 {
       grid-column: 2;
       grid-row: 1/2;
@@ -163,37 +180,57 @@ svg rect {
   position: relative;
   .timestamp {
     @include abs-position(15px, 15px, auto, auto);
+    color: $white_dark;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .user_fullname {
+    margin-left: 20px;
   }
   .createUpdate {
     display: flex;
-    justify-content: flex-start;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 85px 15px 15px 15px;
+    margin-bottom: -18px;
+    padding: 75px 40px 12px 0;
+    display: flex;
     position: relative;
-
+    flex-direction: row-reverse;
+    position: relative;
+    img {
+      @include box(60px);
+    }
     h2 {
       margin-bottom: 0;
       position: relative;
       z-index: 2;
     }
     div {
-      background-color: $main-saturated;
-      border-radius: 3px 3px 0 0;
+      @extend .gradient;
+      border-radius: var(--border) var(--border) 0 0;
       @include box(100%, 110px);
       @include abs-position(0, auto, auto, 0);
     }
   }
   .updateOpt {
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
   }
   textarea {
+    color: $white_dark;
     box-sizing: border-box;
-    @include box(100%, 80px);
+    @include box(100%, 50px);
     padding: 5px;
+    border-style: none;
+    border-color: Transparent;
+    overflow: auto;
+    outline: none;
+    background-color: #283140;
   }
   textarea:focus {
+    height: 70px;
     outline: none;
+    background-color: #333e52;
+    @extend .trans-reg;
   }
 }
 .homeGrid__col--card.createUpdateWrapper {
@@ -202,20 +239,47 @@ svg rect {
     padding: 0 15px;
   }
 }
+.homeGrid__col--card .generate-user {
+  margin-bottom: 15px;
+}
 
 .generate-user {
   display: flex;
   justify-content: flex-start;
   gap: 15px;
-  margin-bottom: 15px;
   h2 {
     align-self: center;
     margin-bottom: 0;
     cursor: pointer;
   }
+  &__lowWrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 20px;
+    &--likes {
+      display: flex;
+      align-self: center;
+      color: #17ab93;
+      width: 100px;
+      height: 35px;
+      align-content: center;
+      p {
+        margin-right: 0;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        color: $white;
+        cursor: pointer;
+        &:hover {
+          color: $blue_primary;
+          @extend .trans-reg;
+        }
+      }
+    }
+  }
 }
-.api-generate-wrapper {
-  gap: 20px;
+.apiRandomUser {
   display: flex;
   flex-direction: column;
 }
@@ -235,9 +299,16 @@ svg rect {
     text-overflow: ellipsis;
   }
 }
-//division between api articles
-.apiArticle {
-  margin-bottom: 15px;
+//article and user post spacing
+section.api-generate-user,
+section.apiArticle,
+.createUpdateWrapper,
+#userpanel,
+.lists__users {
+  margin-bottom: var(--gap-p);
+  @include tablet {
+    margin-bottom: var(--gap-p-sm);
+  }
 }
 //split article section to two
 .temp_split {
@@ -245,6 +316,31 @@ svg rect {
   gap: 15px;
   div {
     flex: 1;
+  }
+  img,
+  p.text_overflow,
+  time {
+    display: none;
+  }
+}
+.homeGrid__col--third .temp_split > div:first-child {
+  display: none;
+}
+span .temp_split {
+  /* using important for now, but
+  * will switch section tags to 
+  * proper tag articles in future
+  */
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+.temp_split.gradient {
+  time {
+    color: rgba(0, 0, 0, 0.61);
+  }
+
+  p {
+    color: white;
   }
 }
 
@@ -255,61 +351,76 @@ svg rect {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
+.starryNight {
+  background-image: url("../images/starry-night-sky.jpg");
+  z-index: -1;
+  position: absolute;
+  opacity: 0.5;
+  width: 100vw;
+  height: 100%;
+  background-size: contain;
+  opacity: 0.2;
+  background-repeat: repeat;
+}
 //## Create New User Page
 #createUserContainer {
-  @include box(100vw, 100vh);
-  display: grid;
+  @include box(auto, auto);
   justify-content: center;
-  grid-template-rows: 100%;
-  grid-template-columns: 50% 50%;
-  background-color: #eafdff;
+  gap: 10vw;
+  display: flex;
+  flex-direction: row-reverse;
+  @include desktop {
+    gap: 5vw;
+  }
+  @include tablet {
+    flex-direction: column;
+    width: 90%;
+    gap: 3vw;
+    justify-content: space-evenly;
+  }
   #leftContainerImg {
     @include box(100%);
-    background-image: url("../images/image-from-rawpixel-id-2370026-jpeg\ \(1\).jpg");
-    background-size: cover;
+
     display: flex;
     justify-content: center;
+    align-items: center;
     img {
       width: 80%;
     }
   }
   section {
-    @include box(100%);
-    background-color: #eafdff;
-    padding: 20vh 2vw;
     max-width: 500px;
-    margin-left: 50px;
+
     h1 {
       padding: 0;
       text-align: left;
-      font-size: 1.5rem;
+      font-size: 3rem;
       font-weight: 600;
       font-style: italic;
-      color: #ff7600;
+      color: $fuschia;
     }
     h2 {
       font-size: 2rem;
+      color: $white;
     }
     p:first-of-type {
       font-size: 1.2rem;
-      margin-top: 15px;
-      margin-bottom: 15px;
     }
     //prevent conflict with entry error.
     p:not(.invalidText) {
-      color: $main-grey;
+      //color: $white_dark;
+      color: #c5a8ad;
+      margin-bottom: 2.18rem;
     }
+
     #createUserQuestions,
     #loginUserQuestions {
-      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 2px 2px 8px #c7ebf1;
-      background-color: white;
+      margin-bottom: 3.57rem;
+      //background-color: #242a326b;
       select {
         width: 100%;
         border: none;
-        border-radius: 0 0 0 10px;
         padding-right: 40px;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -320,47 +431,27 @@ svg rect {
         outline: none;
       }
     }
-    .margin-left-15 {
-      margin-left: 0;
-    }
 
     //media queries
-    @include desktop {
-      width: 80%;
-    }
-    @include large {
-      margin: auto;
-      padding: 8vh 0 0 0;
-    }
+
     @include tablet {
       width: 100%;
-      max-width: none;
-      padding: 5vh 0 0 0;
+
       margin: 0;
-      .info-wrapper input,
-      #loginUserQuestions {
-        border-radius: 0;
-      }
-      .margin-left-15 {
-        margin-left: 15px;
-      }
-      #createUserQuestions {
-        border-radius: 0;
-      }
     }
   }
   h1,
   h2,
   section p,
-  button {
+  #contactForm {
     @include tablet {
       margin-left: 15px;
     }
   }
-  //Media Queries
-  @include large {
-    grid-template-columns: 100%;
-    grid-template-rows: 300px auto;
+  #contactForm {
+    @include tablet {
+      margin-right: 15px;
+    }
   }
 }
 
@@ -396,32 +487,29 @@ svg rect {
 
 .info-wrapper {
   @extend .flex-spacebet;
+  align-items: center;
   height: 50px;
+  font-family: "Inter", sans-serif;
+  border-bottom: 2px dotted #ffffff38;
+  color: #c5a8ad;
   input,
   select {
     align-self: center;
-    padding-left: 40px;
+    padding-left: 20px;
     @include box(100%);
     font-size: 16px;
     border: 0;
-    color: $main-grey;
+    background-color: transparent;
+    color: $input-text;
   }
   input:focus {
     outline: 0;
-    color: #a8a8a8;
-    background-color: #d6edf1;
+    color: $input-text;
     border: 0;
-  }
-  input:active,
-  input:visited {
-    background-color: #daf2f7;
   }
 }
 
 //## login Page
-#loginUserQuestions input:last-of-type {
-  border-radius: 0 0 0 10px;
-}
 #login-invalidPassword.active {
   //a bit laggy without !import
   visibility: visible;
@@ -445,6 +533,55 @@ svg rect {
 .show.createNewUser {
   visibility: visible;
 }
+.show.createNewUser {
+  z-index: 100;
+}
 
+//scrollbar
+body::-webkit-scrollbar {
+  width: 1em;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #042e70;
+  outline: 1px solid #042353;
+  border-radius: 15px;
+}
+
+//FORM FIELD OVERRIDES
+//autofill inputs override
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #09101b inset !important;
+  -webkit-text-fill-color: $white !important;
+  background-clip: content-box !important; //safari autofil
+}
+
+input[type="text"],
+textarea {
+  background-color: transparent;
+  background: rgba(9, 16, 26, 0.1);
+  background-clip: content-box !important; //safari autofill
+}
+
+select#avatar {
+  color: grey;
+  option {
+    height: 100px;
+    margin: 40px;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+  &:active,
+  &:focus,
+  &:visited {
+    color: white;
+  }
+}
 //------MEDIA QUERIES------------
 //1100,992,600

@@ -1,0 +1,156 @@
+//SOLAR SYSTEM CSS ANIMATION
+.solar_system_wrap {
+  @include box(40rem);
+  overflow: hidden;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  //background-color: rgba(0, 255, 136, 0.308);
+  @include desktop {
+    @include box(26rem);
+  }
+  @include tablet {
+    @include box(14rem);
+  }
+}
+
+.solar-system {
+  border-radius: 40rem;
+  padding: 20px;
+  @include box(0rem, 40rem);
+  left: 50%;
+  position: relative;
+  background-color: transparent;
+}
+
+@keyframes galaxyExpansion {
+  0% {
+    width: 0rem;
+    left: 20rem;
+  }
+  100% {
+    width: 40rem;
+    left: 0;
+  }
+}
+@keyframes galaxyExpansionDesk {
+  0% {
+    width: 0rem;
+    left: 13rem;
+  }
+  100% {
+    width: 26rem;
+    left: 0;
+  }
+}
+@keyframes galaxyExpansionTab {
+  0% {
+    width: 0rem;
+    left: 7rem;
+  }
+  100% {
+    width: 14rem;
+    left: 0;
+  }
+}
+.solar-system {
+  animation: galaxyExpansion 0.4s linear 2s 1 normal forwards;
+  @include desktop {
+    height: 26rem;
+    animation: galaxyExpansionDesk 0.4s linear 2s 1 normal forwards;
+  }
+  @include tablet {
+    height: 14rem;
+    animation: galaxyExpansionTab 0.4s linear 2s 1 normal forwards;
+  }
+}
+
+@keyframes rotatePlanet {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.planet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #dedede;
+  animation-name: rotatePlanet;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 15s;
+}
+.planet:after {
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+}
+
+@mixin planetBuild($url, $top, $opacity, $width, $height: $width) {
+  top: $top;
+  opacity: $opacity;
+  animation: rotatePlanet 3s infinite linear;
+  background-image: url($url);
+  @include box($width, $height);
+}
+
+.planet1 {
+  @include box(100%);
+  animation-duration: 25s;
+}
+.planet1:after {
+  @include planetBuild(
+    "../images/planets/planet\ \(5\).svg",
+    -15px,
+    0.7,
+    1.8rem
+  );
+
+  @include tablet {
+    @include box(1rem);
+    top: -7px;
+  }
+}
+.planet2 {
+  @include box(75%);
+  animation-duration: 18s;
+}
+.planet2:after {
+  @include planetBuild(
+    "../images/planets/planet\ \(2\).svg",
+    -10px,
+    0.8,
+    1.3rem
+  );
+}
+.planet3 {
+  @include box(77%);
+  animation-duration: 13s;
+}
+.planet3:after {
+  @include planetBuild(
+    "../images/planets/planet\ \(3\).svg",
+    -8px,
+    0.9,
+    0.9rem
+  );
+}
+.planet4 {
+  @include box(55%);
+  animation-duration: 9s;
+}
+.planet4:after {
+  //background: #82c8ff;
+  @include planetBuild("../images/planets/planet\ \(4\).svg", -6px, 1, 0.6rem);
+}
+.sun {
+  @include box(45%, 44.5%);
+  background: #ffc107;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}

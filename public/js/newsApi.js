@@ -24,6 +24,15 @@ fetchData(url_spaceNews).then((data) => {
   }
 });
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = d.toLocaleString("default", { month: "long" }),
+    day = " " + d.getDate(),
+    year = ", " + d.getFullYear();
+
+  return [month, day, year].join("");
+}
+
 //Build article into HTML node
 const articleBuilder = (data, pic = true, split = true) => {
   let i = getRandomInt(8); //get diff. return api data
@@ -31,10 +40,14 @@ const articleBuilder = (data, pic = true, split = true) => {
   let art = document.createElement("section");
   art.classList.add("apiArticle");
 
+  let date = formatDate(new Date(data[0].publishedAt));
+  console.log(data[0]);
+
   //HTML Template
   const temp_basic = (i) => {
     let basic = `
       <div>
+        <p class='apiArticle__keyword'>${getKeyword()}</p>
         <a href='${data[i].url}'><h3>${data[i].title}</h3><a/>
           ${
             //add a pic option
@@ -43,6 +56,7 @@ const articleBuilder = (data, pic = true, split = true) => {
               : ` `
           }
         <p class='text_overflow'>${data[i].summary}</p>
+        <time>${date}</time>
       </div>`;
     return basic;
   };
@@ -53,7 +67,7 @@ const articleBuilder = (data, pic = true, split = true) => {
       return temp_basic(i);
     } else {
       let temp_split = temp_basic(i) + temp_basic(i + 1);
-      art.classList.add("temp_split");
+      art.classList.add("temp_split", "gradient");
       return temp_split;
     }
   };
@@ -61,3 +75,24 @@ const articleBuilder = (data, pic = true, split = true) => {
   art.innerHTML = temp_split(split);
   return art;
 };
+
+function getKeyword() {
+  let i = getRandomInt(keywords.length - 1);
+  return keywords[i];
+}
+
+const keywords = [
+  "nasa",
+  "fort lauderdale",
+  "solar eclipse",
+  "neil degrasi",
+  "big bang",
+  "earth",
+  "dark matter",
+  "comet",
+  "alpha particles",
+  "absolute zero",
+  "nucleosynthesis",
+  "nuclear fusion",
+  "nuclear fission",
+];

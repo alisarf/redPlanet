@@ -16,7 +16,6 @@ database
   .once("value")
   .then(function (snapshot) {
     var x = snapshot.val();
-    console.log(x);
     authPassword = x.password; //associated psw
 
     for (const key in x) {

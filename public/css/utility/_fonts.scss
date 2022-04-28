@@ -1,36 +1,45 @@
 /**----Font Variables----**/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 :root {
   --lexend-exa: "Lexend Exa", sans-serif;
-  --roboto: "Roboto", "sans-serif";
-  --roboto-mono: "Roboto Mono", "sans-serif";
+  --inter: "Inter", "sans-serif";
+  --inter-mono: "inter Mono", "sans-serif";
+}
+
+@mixin inter {
+  font-family: "Inter", sans-serif;
 }
 
 @mixin lexendExa {
   font-family: var(--lexend-exa), monospace, sans-serif;
 }
 
-@mixin roboto {
-  font-family: var(--roboto), monospace, sans-serif;
+@mixin inter {
+  //font-family: var(--inter), monospace, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-@mixin robotoMono {
-  font-family: var(--roboto-mono), monospace, sans-serif;
+@mixin interMono {
+  font-family: var(--inter-mono), monospace, sans-serif;
 }
 
-#firstnamePanel,
 #firstName,
 .generate-user-name {
-  @include robotoMono;
+  @include inter;
 }
 h1,
 h2,
 h3 {
-  @include robotoMono;
+  @include inter;
+  line-height: 1.3;
 }
 p {
   font-size: 14px;
-  @include roboto;
+  line-height: 1.7;
+  @include inter;
   font-weight: 400;
+  color: $white_dark;
 }
 body {
   font-family: sans-serif;
@@ -40,25 +49,47 @@ h1 {
   font-size: 50px;
 }
 h6 {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
-  color: $main-grey;
+  color: $white_dark;
+  line-height: 1.5rem;
   & strong {
     display: block;
-    color: black;
-    font-weight: 700;
-    @include robotoMono;
+    color: $white;
+    font-weight: 500;
+    @include inter;
+    letter-spacing: 2px;
+    font-size: 1.2;
+    line-height: inherit;
   }
 }
 
-.apiArticle a {
-  color: #1d3e57;
-  text-decoration: none;
-  &:hover {
-    color: #2a587a;
+.apiArticle {
+  p {
+    margin-bottom: 1rem;
+  }
+  time {
+    margin-top: 1.5rem;
+    color: rgb(73, 143, 165);
+  }
+  a {
+    color: #1d3e57;
+    text-decoration: none;
+    &:hover {
+      color: #2a587a;
+    }
   }
 }
-
+h2:not(.apiUsername) {
+  margin-bottom: 20px;
+}
+.h2_basic {
+  font-size: 1.5rem;
+  color: $white;
+  letter-spacing: 2px;
+  @include inter;
+  font-weight: 500;
+}
 //##Logged in User's Name Input
 .fName,
 .lName,
