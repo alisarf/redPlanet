@@ -41,7 +41,6 @@ const articleBuilder = (data, pic = true, split = true) => {
   art.classList.add("apiArticle");
 
   let date = formatDate(new Date(data[0].publishedAt));
-  console.log(data[0]);
 
   //HTML Template
   const temp_basic = (i) => {

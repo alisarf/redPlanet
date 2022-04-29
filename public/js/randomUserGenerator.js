@@ -2,40 +2,40 @@
  * Dynamically fills into home.html fake user profiles.
  * api-generate-sug fills in the suggested friends column
  * apiRandomUser fills in anywhere comments are needed on feed
- * requires web server to stop CORS errors
+ * CORS error on multiple api fetches -> make one large request
  */
 
-const url_userGen = "https://randomuser.me/api/?format=json";
+//get data from api for 100 people
+const url_userGenMult = "https://randomuser.me/api/?results=100";
 let user_node_sug = document.getElementsByClassName("api-generate-sug");
 let user_node_wrap = document.getElementsByClassName("apiRandomUser");
 
-setRandomUser(user_node_sug, false);
-setRandomUser(user_node_wrap, true);
+const getPerson = async (user_node, section) => {
+  let people;
+  await fetch(url_userGenMult)
+    .then((result) => result.json())
+    .then((data) => {
+      people = data;
+    });
 
-function setRandomUser(user_node, section) {
   Array.from(user_node).forEach((node) => {
+    //does section need comment or just name/image?
     if (section == true) {
       for (let i = 1; i <= node.dataset.randomUser; i++) {
-        let target = document.createElement("section");
-        target.classList.add("homeGrid__col--card", "api-generate-user");
-
-        fetchData(url_userGen).then((data) => {
-          target.innerHTML = buildComment(data.results[0]);
-        });
-        node.appendChild(target);
+        let feedPost = document.createElement("section");
+        feedPost.classList.add("homeGrid__col--card", "api-generate-user");
+        feedPost.innerHTML = buildComment(people.results[getRandomInt(99)]);
+        node.appendChild(feedPost);
       }
     } else {
       let user_name = node.querySelector(".api-username");
       let user_icon = node.querySelector(".icon__user");
-
-      fetchData(url_userGen).then((data) => {
-        let user = data.results[0];
-        user_name.innerHTML = `${user.name.first} ${user.name.last}`;
-        user_icon.src = user.picture.thumbnail;
-      });
+      let user = people.results[getRandomInt(99)];
+      user_name.innerHTML = `${user.name.first} ${user.name.last}`;
+      user_icon.src = user.picture.thumbnail;
     }
   });
-}
+};
 
 var comments = [
   "Look out for meteor showers tonight guys! Woo! &#x1F320",
@@ -49,6 +49,7 @@ var comments = [
 ];
 
 function buildComment(user) {
+  //give user data -> return html section
   let feedcomment = `
     <div class="generate-user">
         <div class='generate-user-halo'><img class="icon__user icon__md" src="${
@@ -65,7 +66,9 @@ function buildComment(user) {
     <p> ${getRandomInt(1000)}</p>
     </span>
     <span class='btn__gradient'><button class="btn__primary">Reply</button></span></div>
-
     <span class="timestamp">${getRandomInt(20)} h ago</span>`;
   return feedcomment;
 }
+
+getPerson(user_node_sug, false);
+getPerson(user_node_wrap, true);

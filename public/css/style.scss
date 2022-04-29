@@ -20,6 +20,7 @@
 @import "components/nav";
 @import "components/icons";
 @import "components/login";
+@import "components/solarAnim";
 
 //##General Styles
 html {
@@ -27,9 +28,6 @@ html {
   @include tablet {
     font-size: 12px;
   }
-}
-body {
-  //background-color: $bg_dark;
 }
 img,
 input,
@@ -431,9 +429,6 @@ span .temp_split {
         outline: none;
       }
     }
-
-    //media queries
-
     @include tablet {
       width: 100%;
 
